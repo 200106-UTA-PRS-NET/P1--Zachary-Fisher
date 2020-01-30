@@ -15,6 +15,7 @@ namespace PizzaBoxData.Repositories
 
         private readonly ILogger<RepositoryPizza> _logger;
 
+
         public RepositoryPizza(PizzaDbWebContext dbContext, ILogger<RepositoryPizza> logger)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
@@ -27,6 +28,33 @@ namespace PizzaBoxData.Repositories
 
             Orders entity = Mapper.Map(order);
             _dbContext.Add(entity);
+        }
+
+        public void AddTempOrder(PizzaLib.Models.OrderInProgress o)
+        {
+            _logger.LogInformation(o.StoreName);
+            _logger.LogInformation("Adding Temp Order");
+            Entities.OrderInProgress entity = Mapper.Map(o);
+            _dbContext.Add(entity);
+        }
+
+        public PizzaLib.Models.OrderInProgress GetTempOrder()
+        {
+            PizzaLib.Models.OrderInProgress o = Mapper.Map(_dbContext.OrderInProgress.AsEnumerable().Last());
+            _logger.LogInformation($"Getting Temp Order (Store name{o.StoreName})");
+            return o;
+        }
+
+        public void ClearTempOrders()
+        {
+            _logger.LogInformation("Clearing Temp Data");
+            int i = 0;
+            while(_dbContext.OrderInProgress.Count() > 0)
+            {
+                _dbContext.OrderInProgress.Remove(_dbContext.OrderInProgress.First());
+                i++;
+                if (i > 5) { break; }
+            }
         }
 
         public List<Order> GetOrderbyStore(string sName)

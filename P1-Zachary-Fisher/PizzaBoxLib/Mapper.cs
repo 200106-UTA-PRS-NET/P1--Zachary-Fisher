@@ -66,5 +66,21 @@ namespace PizzaBoxData
                  orders = p
             };
         }
+        public static PizzaLib.Models.OrderInProgress Map(PizzaBoxData.Entities.OrderInProgress p)
+        {
+            return new PizzaLib.Models.OrderInProgress
+            {
+                Pizzas = JsonConvert.DeserializeObject<List<Pizza>>(p.Pizzas),
+                StoreName = p.StoreName
+            };
+        }
+        public static Entities.OrderInProgress Map(PizzaLib.Models.OrderInProgress p)
+        {
+            return new Entities.OrderInProgress
+            {
+                Pizzas = JsonConvert.SerializeObject(p.Pizzas),
+                StoreName = p.StoreName
+            };
+        }
     }
 }

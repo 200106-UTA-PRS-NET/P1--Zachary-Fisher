@@ -11,6 +11,9 @@ namespace PizzaLib.Interfaces
         List<Order> GetOrderbyUser(string uName);
         List<Order> GetOrderbyStore(string sName);
         void AddOrder(Order order);
+        void AddTempOrder(OrderInProgress o);
+        void ClearTempOrders();
         void Save();
+        OrderInProgress GetTempOrder();
     }
 }

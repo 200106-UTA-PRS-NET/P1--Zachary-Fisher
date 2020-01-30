@@ -1,0 +1,27 @@
+﻿@model PizzaLib.Models.OrderInProgress
+
+@{
+    ViewData["Title"] = "OrderDetails";
+}
+
+<h1>OrderDetails</h1>
+
+<div>
+    <h4>Order in Progress</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Pizzas
+        </dt>
+        <dt class="col-sm-2"></dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pizzas)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="AddPizza">Add Pizza</a>
+    <a asp-action="FinalizeOrder">Finalize Order</a>
+    <a asp-action="CancelOrder">Cancel Order</a>
+</div>

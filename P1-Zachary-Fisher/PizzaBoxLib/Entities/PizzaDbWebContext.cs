@@ -22,12 +22,12 @@ namespace PizzaBoxData.Entities
         public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<OrderInProgress> OrderInProgress { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Store> Store { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -128,6 +128,21 @@ namespace PizzaBoxData.Entities
                 entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
 
                 entity.Property(e => e.UserName).HasMaxLength(256);
+            });
+
+            modelBuilder.Entity<OrderInProgress>(entity =>
+            {
+                entity.HasKey(e => e.StoreName)
+                    .HasName("PK__OrderInP__DB2DB480F925C2A8");
+
+                entity.Property(e => e.StoreName)
+                    .HasColumnName("store_name")
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.Pizzas)
+                    .HasColumnName("pizzas")
+                    .HasMaxLength(8000)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Orders>(entity =>

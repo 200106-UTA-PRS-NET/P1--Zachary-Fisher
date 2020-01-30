@@ -8,15 +8,17 @@ namespace PizzaLib.Models
     {
         private string _crust = "thin";
         private int _size = 6;
-        private List<string> allowedToppings = new List<string> { "sausage", "pepperoni", "cheese", "bacon", "beef",
-            "canadian bacon", "mushrooms", "onions", "green peppers", "olives", "pineapple", "jalapenos", "sauce"};
+        private string _preset;
+        public string Preset { get; set; }
         public List<string> toppings = new List<string>();
+
         public Pizza()
         {
             
         }
         public Pizza(string s)
         {
+            _preset = s;
             if (s.Equals("hawaiian"))
             {
                 toppings = new List<string> { "sauce", "cheese", "pineapple", "canadian bacon" };
@@ -41,10 +43,6 @@ namespace PizzaLib.Models
             {
                 toppings = new List<string> { "sauce", "cheese", "beef", "pickles", "mushrooms", "bacon" };
             }
-        }
-        public void MakeDefault()
-        {
-            toppings = new List<string> { "sauce", "cheese" };
         }
 
         public decimal Cost { get; set; }
@@ -75,37 +73,7 @@ namespace PizzaLib.Models
         //(a.Equals("sausage") || a.Equals("pepperoni") || a.Equals("cheese") || a.Equals("bacon") || a.Equals("beef") ||
         //a.Equals("canadian bacon") || a.Equals("mushrooms") || a.Equals("onions") || a.Equals("green peppers") ||
         //        a.Equals("olives") || a.Equals("pineapple") || a.Equals("jalapenos") || a.Equals("sauce")
-        public void AddTopping(string a)
-        {
-            if (allowedToppings.Contains(a))
-            {
-                if (toppings.Count < 5)
-                {
-                    toppings.Add(a);
-                    setCost();
-                }
-                else
-                {
-                    Console.WriteLine("Too many toppings"); ;
-                }
-            }
-            else
-            {
-                Console.WriteLine("Not a valid topping");
-            }
-        }
-        public void RemoveTopping(string a)
-        {
-            if (toppings.Contains(a))
-            {
-                toppings.Remove(a);
-                setCost();
-            }
-            else
-            {
-                Console.WriteLine("You can only remove a topping that is on the pizza");
-            }
-        }
+        
         public string Toppings()
         {
             StringBuilder r = new StringBuilder();
@@ -127,39 +95,6 @@ namespace PizzaLib.Models
                 cost += .25m;
             }
             Cost = cost;
-        }
-        public void Preset(string s)
-        {
-            if (s.Equals("hawaiian"))
-            {
-                toppings = new List<string> { "sauce", "cheese", "pineapple", "canadian bacon" };
-                setCost();
-            }
-            else if (s.Equals("3 meat"))
-            {
-                toppings = new List<string> { "sauce", "cheese", "sausage", "canadian bacon", "pepperoni" };
-                setCost();
-            }
-            else if (s.Equals("supreme"))
-            {
-                toppings = new List<string> { "sauce", "cheese", "sausage", "mushroom", "green pepper", "pepperoni" };
-                setCost();
-            }
-            else if (s.Equals("meat lover"))
-            {
-                toppings = new List<string> { "sauce", "cheese", "sausage", "canadian bacon", "pepperoni", "bacon", "beef" };
-                setCost();
-            }
-            else if (s.Equals("cheeseburger"))
-            {
-                toppings = new List<string> { "sauce", "cheese", "beef", "pickles", "mushrooms" };
-                setCost();
-            }
-            else if (s.Equals("bacon cheeseburger"))
-            {
-                toppings = new List<string> { "sauce", "cheese", "beef", "pickles", "mushrooms", "bacon" };
-                setCost();
-            }
         }
     }
 }
