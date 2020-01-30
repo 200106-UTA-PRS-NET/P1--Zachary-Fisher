@@ -8,7 +8,6 @@ namespace PizzaLib.Interfaces
     public interface IRepositoryPizza
     {
         IEnumerable<Store> GetStores();
-        IEnumerable<Order> GetOrders();
         List<Order> GetOrderbyUser(string uName);
         List<Order> GetOrderbyStore(string sName);
         void AddOrder(Order order);

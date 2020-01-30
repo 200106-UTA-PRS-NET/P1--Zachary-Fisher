@@ -13,7 +13,34 @@ namespace PizzaLib.Models
         public List<string> toppings = new List<string>();
         public Pizza()
         {
-
+            
+        }
+        public Pizza(string s)
+        {
+            if (s.Equals("hawaiian"))
+            {
+                toppings = new List<string> { "sauce", "cheese", "pineapple", "canadian bacon" };
+            }
+            else if (s.Equals("3 meat"))
+            {
+                toppings = new List<string> { "sauce", "cheese", "sausage", "canadian bacon", "pepperoni" };
+            }
+            else if (s.Equals("supreme"))
+            {
+                toppings = new List<string> { "sauce", "cheese", "sausage", "mushroom", "green pepper", "pepperoni" };
+            }
+            else if (s.Equals("meat lover"))
+            {
+                toppings = new List<string> { "sauce", "cheese", "sausage", "canadian bacon", "pepperoni", "bacon", "beef" };
+            }
+            else if (s.Equals("cheeseburger"))
+            {
+                toppings = new List<string> { "sauce", "cheese", "beef", "pickles", "mushrooms" };
+            }
+            else if (s.Equals("bacon cheeseburger"))
+            {
+                toppings = new List<string> { "sauce", "cheese", "beef", "pickles", "mushrooms", "bacon" };
+            }
         }
         public void MakeDefault()
         {
@@ -90,21 +117,10 @@ namespace PizzaLib.Models
             string re = Convert.ToString(r);
             return re;
         }
-        private void setCost()
+        public void setCost()
         {
             decimal cost = 0m;
-            if (Crust.Equals("thin"))
-            {
-                cost += .50m;
-            }
-            else if (Crust.Equals("sicilian"))
-            {
-                cost += 1m;
-            }
-            else
-            {
-                cost += 1.5m;
-            }
+            
             cost += (decimal)(.25 * _size + 2.5);
             foreach (var topping in toppings)
             {

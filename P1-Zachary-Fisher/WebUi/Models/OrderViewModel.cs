@@ -15,9 +15,12 @@ namespace WebUi.Models
         public string Username { get; set; }
         [Display(Name = "Cost")]
         public decimal? Cost { get; set; }
-        [Display(Name = "Pizzas")]
-        public string pizzas { get; set; }
         [Display(Name ="Time of Purchase")]
         public DateTime? Purchasetime { get; set; }
+
+        [Display(Name = "Crust")]
+        public string Crust { get; set; }
+        public int Size { get; set; }
+        public string Preset { get; set; }
     }
 }

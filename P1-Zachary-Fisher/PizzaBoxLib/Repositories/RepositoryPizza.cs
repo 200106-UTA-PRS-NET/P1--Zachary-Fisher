@@ -4,11 +4,12 @@ using PizzaLib.Interfaces;
 using PizzaLib.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PizzaBoxData.Repositories
 {
-    class RepositoryPizza : IRepositoryPizza
+    public class RepositoryPizza : IRepositoryPizza
     {
         private readonly PizzaDbWebContext _dbContext;
 
@@ -22,7 +23,7 @@ namespace PizzaBoxData.Repositories
 
         public void AddOrder(PizzaLib.Models.Order order)
         {
-            _logger.LogInformation("Adding restaurant");
+            _logger.LogInformation("Adding order");
 
             Orders entity = Mapper.Map(order);
             _dbContext.Add(entity);
@@ -30,22 +31,25 @@ namespace PizzaBoxData.Repositories
 
         public List<Order> GetOrderbyStore(string sName)
         {
-            throw new NotImplementedException();
+            IQueryable<Orders> items = _dbContext.Orders;
+
+            items = items.Where(x => x.StoreName == sName);
+
+            return items.Select(Mapper.Map).ToList();
         }
 
         public List<Order> GetOrderbyUser(string uName)
         {
-            throw new NotImplementedException();
+            IQueryable<Orders> items = _dbContext.Orders;
+            
+            items = items.Where( x=> x.UserName == uName);
+            
+            return items.Select(Mapper.Map).ToList();
         }
-
-        public IEnumerable<Order> GetOrders()
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<PizzaLib.Models.Store> GetStores()
         {
-            throw new NotImplementedException();
+            IQueryable<Entities.Store> items = _dbContext.Store;
+            return items.Select(Mapper.Map); 
         }
         public void Save()
         {

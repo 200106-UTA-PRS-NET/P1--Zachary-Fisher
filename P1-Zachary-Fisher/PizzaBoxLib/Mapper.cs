@@ -13,16 +13,19 @@ namespace PizzaBoxData
         {
             return new Order
             {
+                ordertime = (DateTime)o.Purchasetime,
                 Sname = o.StoreName,
                 Uname = o.UserName,
                 pizzas = JsonConvert.DeserializeObject<List<Pizza>>(o.Pizzas),
                 Cost = (decimal)o.Cost
+                
             };
         }
         public static Orders Map(Order o)
         {
             return new Orders
             {
+                Purchasetime = o.ordertime,
                 StoreName = o.Sname,
                 UserName = o.Uname,
                 Pizzas = JsonConvert.SerializeObject(o.pizzas),

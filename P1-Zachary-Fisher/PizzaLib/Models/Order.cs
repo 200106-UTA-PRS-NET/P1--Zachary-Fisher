@@ -11,6 +11,7 @@ namespace PizzaLib.Models
         public string Uname { get; set; }
 
         public string Sname { get; set; }
+        public DateTime ordertime { get; set; }
         public Order()
         {
             pizzas = new List<Pizza>();

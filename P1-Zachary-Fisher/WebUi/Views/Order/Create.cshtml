@@ -1,0 +1,111 @@
+﻿@model WebUi.Models.OrderViewModel
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h1>Create Order</h1>
+
+<h4>Pricing</h4>
+<hr />
+
+<table style="width:100%">
+    <tr>
+        <th>Style</th>
+        <th>6"</th>
+        <th>8"</th>
+        <th>10"</th>
+        <th>12"</th>
+        <th>14"</th>
+    </tr>
+    <tr>
+        <td>Hawaiian</td>
+        <td>$6.00</td>
+        <td>$6.50</td>
+        <td>$7.00</td>
+        <td>$7.50</td>
+        <td>$8.00</td>
+    </tr>
+    <tr>
+        <td>3 meat</td>
+        <td>$6.50</td>
+        <td>$7.00</td>
+        <td>$7.50</td>
+        <td>$8.00</td>
+        <td>$8.50</td>
+    </tr>
+    <tr>
+        <td>Supreme</td>
+        <td>$7.00</td>
+        <td>$7.50</td>
+        <td>$8.00</td>
+        <td>$8.50</td>
+        <td>$9.00</td>
+    </tr>
+    <tr>
+        <td>Cheeseburger</td>
+        <td>$6.50</td>
+        <td>$7.00</td>
+        <td>$7.50</td>
+        <td>$8.00</td>
+        <td>$8.50</td>
+    </tr>
+    <tr>
+        <td>Bacon Cheeseburger</td>
+        <td>$7.00</td>
+        <td>$7.50</td>
+        <td>$8.00</td>
+        <td>$8.50</td>
+        <td>$9.00</td>
+    </tr>
+</table>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="StoreName" class="control-label"></label>
+                <p><input type="radio" name="StoreName" value="House of Pizza" />House of Pizza  
+                <input type="radio" name="StoreName" value="Pizza Hut" />Pizza Hut  
+                <input type="radio" name="StoreName" value="Papa Johns" />Papa John's</p>
+            </div>
+            <div class="form-group">
+                <label asp-for="Crust" class="control-label"></label>
+                <p><input type="radio" name="Crust" value="thin" />Thin  
+                <input type="radio" name="Crust" value="deep dish" />Deep Dish  
+                <input type="radio" name="Crust" value="sicilian" />Sicilian</p>
+            </div>
+            <div class="form-group">
+                <label asp-for="Size" class="control-label"></label>
+                <p><input type="radio" name="Size" value="6" />6"  
+                <input type="radio" name="Size" value="8" />8"  
+                <input type="radio" name="Size" value="10" />10"  
+                <input type="radio" name="Size" value="12" />12"  
+                <input type="radio" name="Size" value="14" />14"</p>
+            </div>
+            <div class="form-group">
+                <label asp-for="Preset" class="control-label"></label>
+                <p>
+                    <input type="radio" name="Preset" value="hawaiian" />Hawaiian  
+                    <input type="radio" name="Preset" value="3 meat" />3 meat  
+                    <input type="radio" name="Preset" value="supreme" />Supreme  
+                    <input type="radio" name="Preset" value="cheeseburger" />Cheeseburger  
+                    <input type="radio" name="Preset" value="bacon cheeseburger" />Bacon cheeseburger  
+                </p>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to Order Index</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
