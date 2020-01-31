@@ -1,7 +1,7 @@
 ﻿@model PizzaLib.Models.OrderInProgress
 
 @{
-    ViewData["Title"] = "OrderDetails";
+    ViewData["Title"] = "Finalize Order";
 }
 
 <h1>OrderDetails</h1>
@@ -50,7 +50,7 @@
     </table>
 </div>
 <div>
-    <a asp-action="AddPizza">Add Pizza</a>
-    <a asp-action="FinalizeOrder">Finalize Order</a>
+    <a asp-action="OrderDetails">Back</a>
+    <a asp-action="Finalize">Confirm Purchase</a>
     <a asp-action="CancelOrder">Cancel Order</a>
 </div>

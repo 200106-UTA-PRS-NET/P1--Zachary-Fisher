@@ -141,8 +141,8 @@ namespace PizzaBoxData.Entities
 
                 entity.Property(e => e.Pizzas)
                     .HasColumnName("pizzas")
-                    .HasMaxLength(8000)
-                    .IsUnicode(false);
+                    .HasMaxLength(4000);
+                    //.IsUnicode(false);
             });
 
             modelBuilder.Entity<Orders>(entity =>

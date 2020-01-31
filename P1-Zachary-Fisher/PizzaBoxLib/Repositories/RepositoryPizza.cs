@@ -33,8 +33,10 @@ namespace PizzaBoxData.Repositories
         public void AddTempOrder(PizzaLib.Models.OrderInProgress o)
         {
             _logger.LogInformation(o.StoreName);
+            _logger.LogInformation($"num pizzas:{o.Pizzas.Count}");
             _logger.LogInformation("Adding Temp Order");
             Entities.OrderInProgress entity = Mapper.Map(o);
+            Console.WriteLine(entity.Pizzas);
             _dbContext.Add(entity);
         }
 

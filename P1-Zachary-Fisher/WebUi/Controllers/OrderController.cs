@@ -24,7 +24,22 @@ namespace WebUi.Controllers
         {
             return View();
         }
-        public ActionResult OrderDetails() => View();
+        public ActionResult OrderDetails() //=> View();
+        {
+            var order = Repo.GetTempOrder();
+            PizzaLib.Models.OrderInProgress ord = new PizzaLib.Models.OrderInProgress();
+            ord.StoreName = order.StoreName;
+            ord.Pizzas = order.Pizzas;
+            return View(ord);
+        }
+        public ActionResult FinalizeOrder()
+        {
+            var order = Repo.GetTempOrder();
+            PizzaLib.Models.OrderInProgress ord = new PizzaLib.Models.OrderInProgress();
+            ord.StoreName = order.StoreName;
+            ord.Pizzas = order.Pizzas;
+            return View(ord);
+        }
         public ActionResult Finalize()
         {
             OrderInProgress o = Repo.GetTempOrder();
@@ -63,10 +78,10 @@ namespace WebUi.Controllers
             };
             pi.setCost();
             OrderInProgress o = Repo.GetTempOrder();
-            Console.WriteLine($"pi: {pi.Size},{pi.Crust},{pi.Preset},{pi.toppings[0]}");
             o.Pizzas.Add(pi);
             Repo.ClearTempOrders();
             Repo.AddTempOrder(o);
+            Repo.Save();
             return RedirectToAction(nameof(OrderDetails));
         }
 
@@ -87,53 +102,34 @@ namespace WebUi.Controllers
             };
             Repo.AddTempOrder(o);
             Repo.Save();
-            return RedirectToAction(nameof(OrderDetails));   
-            /*try
-            {
-                if (ModelState.IsValid)
-                {
-                    decimal c = 0;
-                    List<Pizza> a = new List<Pizza>();
-                    for (int i = 0; i < order.Size.Count; i++)
-                    {
-                        PizzaLib.Models.Pizza p = new Pizza(order.Preset)
-                        {
-                            Crust = order.Crust,
-                            Size = order.Size,
-                        };
-                        p.setCost();
-                        c += p.Cost;
-                        a.Add(p);
-                    }
-                    PizzaLib.Models.Order o = new Order()
-                    {
-                        ordertime = DateTime.Now,
-                        Uname = User.Identity.Name,
-                        Sname= order.StoreName,
-                        pizzas = a,
-                        Cost=c
-                    };
-
-                    return RedirectToAction(nameof(Details), o);
-
-                    Repo.AddOrder(o);
-                    Repo.Save();
-
-                    return RedirectToAction(nameof(Index));
-                }
-                else
-                    return View();
-            }
-            catch
-            {
-                return View();
-            }*/
+            return RedirectToAction(nameof(AddPizza));   
         }
-
 
         public ActionResult ViewOrders()
         {
             var orders = Repo.GetOrderbyUser(User.Identity.Name);
+            List<OrderViewModel> ovm = new List<OrderViewModel>();
+            foreach (var item in orders)
+            {
+                Pizza p = item.pizzas[0];
+                OrderViewModel ord = new OrderViewModel();
+                ord.StoreName = item.Sname;
+                ord.Purchasetime = item.ordertime;
+                ord.pizzas = JsonConvert.SerializeObject(item.pizzas);
+                ord.Cost = item.Cost;
+                ovm.Add(ord);
+            }
+            return View(ovm);
+        }
+        public ActionResult ViewOrdersStore() => View();
+        public ActionResult ViewOrdersByStore(StoreInputModel s, IFormCollection form)
+        {
+            Store st = new Store()
+            {
+                SName = s.SName
+            };
+            var orders = Repo.GetOrderbyStore(st.SName);
+            Console.WriteLine(st.SName);
             List<OrderViewModel> ovm = new List<OrderViewModel>();
             foreach (var item in orders)
             {

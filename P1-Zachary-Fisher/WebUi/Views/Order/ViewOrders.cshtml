@@ -1,0 +1,51 @@
+﻿@model IEnumerable<WebUi.Models.OrderViewModel>
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h1>View</h1>
+
+<div>
+    <h4>OrderViewModel</h4>
+    <hr />
+    <table>
+    <thead>
+        <tr>
+            <th>
+                Store Name
+            </th>
+            <th>
+                Cost
+            </th>
+            <th>
+                Time of Purchase
+            </th>
+            <th>
+                Pizza
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StoreName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Purchasetime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pizzas)
+            </td>
+        </tr>
+        }
+    </table>
+
+</div>
+<div>
+    <a asp-action="Index">Back to Orders</a>
+</div>
