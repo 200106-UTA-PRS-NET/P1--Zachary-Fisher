@@ -10,6 +10,7 @@ namespace WebUi.Models
     {
         [Display(Name = "ID")]
         public int Orderid { get; set; }
+        [Required]
         [Display(Name = "Store")]
         public string StoreName { get; set; }
         public string Username { get; set; }

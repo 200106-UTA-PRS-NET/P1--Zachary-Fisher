@@ -17,7 +17,6 @@ namespace WebUi.Controllers
     public class OrderController:Controller
     {
         public IRepositoryPizza Repo { get; }
-
         public OrderController(IRepositoryPizza repo) =>
             Repo = repo ?? throw new ArgumentNullException(nameof(repo));
         public IActionResult Index()
@@ -63,8 +62,6 @@ namespace WebUi.Controllers
             return RedirectToAction(nameof(Index));
 
         }
-
-
         public ActionResult AddPizza() => View();
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -84,11 +81,7 @@ namespace WebUi.Controllers
             Repo.Save();
             return RedirectToAction(nameof(OrderDetails));
         }
-
-
-
         public ActionResult Create() => View();
-
         [HttpPost]
         [ValidateAntiForgeryToken] 
         public ActionResult Create(OrderInProgress order, IFormCollection form)
@@ -104,7 +97,6 @@ namespace WebUi.Controllers
             Repo.Save();
             return RedirectToAction(nameof(AddPizza));   
         }
-
         public ActionResult ViewOrders()
         {
             var orders = Repo.GetOrderbyUser(User.Identity.Name);
@@ -143,11 +135,6 @@ namespace WebUi.Controllers
             }
             return View(ovm);
         }
-
-
-
-
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
