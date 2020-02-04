@@ -22,7 +22,7 @@ steps:
     scannerMode: 'MSBuild'
     projectKey: '$(SonarProjectKey)'
     projectName: '$(SonarProjectName)'
-    extraProperties:  |
+    extraProperties: |
       sonar.cs.opencover.reportPaths="$(Build.ArtifactStagingDirectory)/coverage/*"
       sonar.cs.vstest.reportPaths="$(Build.ArtifactStagingDirectory)/test/*.trx"
       sonar.exclusions=**/wwwroot/**/*
