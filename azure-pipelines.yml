@@ -24,8 +24,8 @@ steps:
     projectName: '$(SonarProjectName)'
     extraProperties: |
       sonar.cs.opencover.reportsPaths="$(Build.ArtifactStagingDirectory)/coverage/*"
-      sonar.cs.vstest.reportsPaths="$(Build.ArtifactStagingDirectory)/PizzaTest/*.trx"
-      sonar.exclusions=**/wwwroot/**/*
+      sonar.cs.vstest.reportsPaths="$(Build.ArtifactStagingDirectory)/test/*.trx"
+      sonar.exclusions=**/wwwroot/lib/**/*
 
 
 - script: dotnet build --configuration $(buildConfiguration)
