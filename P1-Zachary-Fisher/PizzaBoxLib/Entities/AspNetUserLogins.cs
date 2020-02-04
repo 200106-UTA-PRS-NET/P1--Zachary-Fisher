@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace PizzaBoxData.Entities
+﻿namespace PizzaBoxData.Entities
 {
     public partial class AspNetUserLogins
     {

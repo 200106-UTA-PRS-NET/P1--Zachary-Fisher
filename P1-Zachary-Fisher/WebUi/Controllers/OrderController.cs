@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Mvc;
 using WebUi.Models;
 using System.Diagnostics;
 using System;
@@ -9,7 +6,6 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using PizzaLib.Models;
 using PizzaLib.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 
 namespace WebUi.Controllers
