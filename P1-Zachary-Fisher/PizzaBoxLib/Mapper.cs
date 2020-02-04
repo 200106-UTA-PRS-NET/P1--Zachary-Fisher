@@ -2,7 +2,6 @@
 using PizzaLib.Models;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Newtonsoft.Json;
 
 namespace PizzaBoxData
@@ -76,7 +75,6 @@ namespace PizzaBoxData
         }
         public static Entities.OrderInProgress Map(PizzaLib.Models.OrderInProgress o)
         {
-            string pis = JsonConvert.SerializeObject(o.Pizzas);
             return new Entities.OrderInProgress
             {
                 Pizzas = JsonConvert.SerializeObject(o.Pizzas),

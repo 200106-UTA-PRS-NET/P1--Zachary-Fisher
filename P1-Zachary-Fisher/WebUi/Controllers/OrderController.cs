@@ -19,7 +19,7 @@ namespace WebUi.Controllers
         {
             return View();
         }
-        public ActionResult OrderDetails() //=> View();
+        public ActionResult OrderDetails() 
         {
             var order = Repo.GetTempOrder();
             PizzaLib.Models.OrderInProgress ord = new PizzaLib.Models.OrderInProgress();
@@ -99,7 +99,6 @@ namespace WebUi.Controllers
             List<OrderViewModel> ovm = new List<OrderViewModel>();
             foreach (var item in orders)
             {
-                Pizza p = item.pizzas[0];
                 OrderViewModel ord = new OrderViewModel();
                 ord.StoreName = item.Sname;
                 ord.Purchasetime = item.ordertime;
@@ -121,7 +120,6 @@ namespace WebUi.Controllers
             List<OrderViewModel> ovm = new List<OrderViewModel>();
             foreach (var item in orders)
             {
-                Pizza p = item.pizzas[0];
                 OrderViewModel ord = new OrderViewModel();
                 ord.StoreName = item.Sname;
                 ord.Purchasetime = item.ordertime;

@@ -1,16 +1,10 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace PizzaBoxData.Entities
 {
     public partial class PizzaDbWebContext : DbContext
     {
         public PizzaDbWebContext()
-        {
-        }
-
-        public PizzaDbWebContext(DbContextOptions<PizzaDbWebContext> options)
-            : base(options)
         {
         }
 
@@ -141,7 +135,6 @@ namespace PizzaBoxData.Entities
                 entity.Property(e => e.Pizzas)
                     .HasColumnName("pizzas")
                     .HasMaxLength(4000);
-                    //.IsUnicode(false);
             });
 
             modelBuilder.Entity<Orders>(entity =>
@@ -188,10 +181,6 @@ namespace PizzaBoxData.Entities
                     .HasColumnName("password")
                     .HasMaxLength(30);
             });
-
-            OnModelCreatingPartial(modelBuilder);
         }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

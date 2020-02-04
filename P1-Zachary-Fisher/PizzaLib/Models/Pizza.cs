@@ -8,7 +8,6 @@ namespace PizzaLib.Models
     {
         private string _crust = "thin";
         private int _size = 6;
-        private string _preset;
         public string Preset { get; set; }
         public List<string> toppings = new List<string>();
 
@@ -18,7 +17,7 @@ namespace PizzaLib.Models
         }
         public Pizza(string s)
         {
-            _preset = s;
+            Preset = s;
             if (s.Equals("hawaiian"))
             {
                 toppings = new List<string> { "sauce", "cheese", "pineapple", "canadian bacon" };
@@ -70,9 +69,6 @@ namespace PizzaLib.Models
                 }
             }
         }
-        //(a.Equals("sausage") || a.Equals("pepperoni") || a.Equals("cheese") || a.Equals("bacon") || a.Equals("beef") ||
-        //a.Equals("canadian bacon") || a.Equals("mushrooms") || a.Equals("onions") || a.Equals("green peppers") ||
-        //        a.Equals("olives") || a.Equals("pineapple") || a.Equals("jalapenos") || a.Equals("sauce")
         
         public string Toppings()
         {
