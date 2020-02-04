@@ -23,8 +23,8 @@ steps:
     projectKey: '$(SonarProjectKey)'
     projectName: '$(SonarProjectName)'
     extraProperties: |
-      sonar.cs.opencover.reportPaths="$(Build.ArtifactStagingDirectory)/coverage/*"
-      sonar.cs.vstest.reportPaths="$(Build.ArtifactStagingDirectory)/test/*.trx"
+      sonar.cs.opencover.reportsPaths="$(Build.ArtifactStagingDirectory)/coverage/*"
+      sonar.cs.vstest.reportsPaths="$(Build.ArtifactStagingDirectory)/test/*.trx"
       sonar.exclusions=**/wwwroot/**/*
 
 
