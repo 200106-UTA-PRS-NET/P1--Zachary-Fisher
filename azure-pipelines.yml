@@ -22,10 +22,10 @@ steps:
     scannerMode: 'MSBuild'
     projectKey: '$(SonarProjectKey)'
     projectName: '$(SonarProjectName)'
-    extraProperties: 
-      sonar.cs.opencover.reportPaths="$(Build.ArtifactStagingDirectory)/coverage/*"
-      sonar.cs.vstest.reportPaths="$(Build.ArtifactStagingDirectory)/test/*.trx"
-      sonar.exclusions=**/wwwroot/lib/**/*
+    extraProperties: |
+      sonar.cs.opencover.reportsPaths="$(Build.ArtifactStagingDirectory)/coverage/*"
+      sonar.cs.vstest.reportsPaths="$(Build.ArtifactStagingDirectory)/test/*.trx"
+      sonar.exclusions=**/wwwroot/**/*
 
 
 - script: dotnet build --configuration $(buildConfiguration)
@@ -38,6 +38,8 @@ steps:
     --no-build
     --results-directory $(Build.ArtifactStagingDirectory)/PizzaTest/
     /p:CollectCoverage=true
+    /p:CoverletOutputFormat=opencover
+    /p:CoverletOutput='$(Build.ArtifactStagingDirectory)/coverage/'
   workingDirectory: $(pathtosolution)
   displayName: 'dotnet test'
 
