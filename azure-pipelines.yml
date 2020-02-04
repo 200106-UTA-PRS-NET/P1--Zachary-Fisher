@@ -14,13 +14,20 @@ variables:
   buildConfiguration: 'Release'
   pathtotest: "P1-Zachary-Fisher/PizzaTest"
 
-#1 Dotnet Build
 steps:
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloud connection 1'
+    organization: '$(SonarOrganization)'
+    scannerMode: 'MSBuild'
+    projectKey: '$(SonarProjectKey)'
+    projectName: '$(SonarProjectName)'
+    extraProperties: ''
+
 - script: dotnet build --configuration $(buildConfiguration)
   workingDirectory: $(pathtosolution)
   displayName: 'dotnet build $(buildConfiguration)'
 
-#2 Dotnet Test
 - script: dotnet test
     --configuration $(buildConfiguration)
     --logger trx
@@ -30,9 +37,13 @@ steps:
   workingDirectory: $(pathtosolution)
   displayName: 'dotnet test'
 
-#3 Publish Results
 - task: DotnetCoreCLI@2
   inputs:
     command: 'test'
     projects: '$(pathtotest)'
     workingDirectory: '$(pathtosolution)'
+
+- task: SonarCloudAnalyze@1
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
