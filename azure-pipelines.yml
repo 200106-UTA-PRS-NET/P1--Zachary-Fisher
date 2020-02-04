@@ -12,6 +12,7 @@ pool:
 variables:
   pathtosolution: "P1-Zachary-Fisher/"
   buildConfiguration: 'Release'
+  pathtotest: "P1-Zachary-Fisher/PizzaTest"
 
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
@@ -26,3 +27,9 @@ steps:
     /p:CollectCoverage=true
   workingDirectory: $(pathtosolution)
   displayName: 'dotnet test'
+
+- task: DotnetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: '$(pathtotest)'
+    workingDirectory: '$(pathtosolution)'
