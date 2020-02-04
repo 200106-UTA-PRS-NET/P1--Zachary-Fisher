@@ -10,8 +10,19 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
+  pathtosolution: "P1-Zachary-Fisher/"
   buildConfiguration: 'Release'
 
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
+  workingDirectory: $(pathtosolution)
   displayName: 'dotnet build $(buildConfiguration)'
+
+- script: dotnet test
+    --configuration $(buildConfiguration)
+    --logger trx
+    --no-build
+    --results-directory $(Build.ArtifactStagingDirectory)/PizzaTest/
+    /p:CollectCoverage=true
+  workingDirectory: $(pathtosolution)
+  displayName: 'dotnet test'
