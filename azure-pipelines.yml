@@ -38,6 +38,8 @@ steps:
     --no-build
     --results-directory $(Build.ArtifactStagingDirectory)/PizzaTest/
     /p:CollectCoverage=true
+    /p:CoverletOutputFormat=opencover
+    /p:CoverletOutput='$(Build.ArtifactStagingDirectory)/coverage'
   workingDirectory: $(pathtosolution)
   displayName: 'dotnet test'
 
